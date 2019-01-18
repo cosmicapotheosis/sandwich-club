@@ -30,10 +30,10 @@ public class DetailActivity extends AppCompatActivity {
         ImageView ingredientsIv = findViewById(R.id.image_iv);
 
         // Find the text views for each of the details
-        mAlsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
-        mPlaceOfOrigin = (TextView) findViewById(R.id.origin_tv);
-        mDescription = (TextView) findViewById(R.id.description_tv);
-        mIngredients = (TextView) findViewById(R.id.ingredients_tv);
+        mAlsoKnownAs = findViewById(R.id.also_known_tv);
+        mPlaceOfOrigin = findViewById(R.id.origin_tv);
+        mDescription = findViewById(R.id.description_tv);
+        mIngredients = findViewById(R.id.ingredients_tv);
 
         Intent intent = getIntent();
         if (intent == null) {
