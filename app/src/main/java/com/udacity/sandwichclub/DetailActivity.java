@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -15,12 +16,24 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    // Text views to display sandwich details
+    private TextView mAlsoKnownAs;
+    private TextView mPlaceOfOrigin;
+    private TextView mDescription;
+    private TextView mIngredients;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
+
+        // Find the text views for each of the details
+        mAlsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
+        mPlaceOfOrigin = (TextView) findViewById(R.id.origin_tv);
+        mDescription = (TextView) findViewById(R.id.description_tv);
+        mIngredients = (TextView) findViewById(R.id.ingredients_tv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -51,6 +64,33 @@ public class DetailActivity extends AppCompatActivity {
                     .into(ingredientsIv);
 
             setTitle(sandwich.getMainName());
+
+            // Set the text views to display retrieved JSON data
+            // Need to iterate through list for alsoKnownAs and Ingredients
+            // and add it all into a single string
+            StringBuilder alsoKnownAsString = new StringBuilder();
+            int alsoKnownAsListLength = sandwich.getAlsoKnownAs().size();
+            for (int i = 0; i < alsoKnownAsListLength; i++) {
+                alsoKnownAsString.append(sandwich.getAlsoKnownAs().get(i));
+                if (i < alsoKnownAsListLength - 1) {
+                    alsoKnownAsString.append(", ");
+                }
+            }
+            mAlsoKnownAs.setText(alsoKnownAsString);
+
+            mPlaceOfOrigin.setText(sandwich.getPlaceOfOrigin());
+
+            mDescription.setText(sandwich.getDescription());
+
+            StringBuilder ingredientsString = new StringBuilder();
+            int ingredientsListLength = sandwich.getIngredients().size();
+            for (int i = 0; i < ingredientsListLength; i++) {
+                ingredientsString.append(sandwich.getIngredients().get(i));
+                if (i < ingredientsListLength - 1) {
+                    ingredientsString.append(", ");
+                }
+            }
+            mIngredients.setText(ingredientsString);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -37,7 +37,7 @@ public class JsonUtils {
 
         String image = sandwich.getString("image");
 
-        JSONArray ingredientsJson = name.getJSONArray("ingredients");
+        JSONArray ingredientsJson = sandwich.getJSONArray("ingredients");
         List<String> ingredients = new ArrayList<String>();
         for (int i = 0; i < ingredientsJson.length(); i++)
             ingredients.add(ingredientsJson.getString(i));
