@@ -24,23 +24,23 @@ public class JsonUtils {
         // Name sub JSON
         JSONObject name = sandwich.getJSONObject("name");
 
-        String mainName = name.getString("mainName");
+        String mainName = name.optString("mainName");
         // alsoKnownAs is an array. Needs to be converted to String list
         JSONArray alsoKnownAsJson = name.getJSONArray("alsoKnownAs");
         List<String> alsoKnownAs = new ArrayList<String>();
         for (int i = 0; i < alsoKnownAsJson.length(); i++)
-            alsoKnownAs.add(alsoKnownAsJson.getString(i));
+            alsoKnownAs.add(alsoKnownAsJson.optString(i));
 
-        String placeOfOrigin = sandwich.getString("placeOfOrigin");
+        String placeOfOrigin = sandwich.optString("placeOfOrigin");
 
-        String description = sandwich.getString("description");
+        String description = sandwich.optString("description");
 
-        String image = sandwich.getString("image");
+        String image = sandwich.optString("image");
 
         JSONArray ingredientsJson = sandwich.getJSONArray("ingredients");
         List<String> ingredients = new ArrayList<String>();
         for (int i = 0; i < ingredientsJson.length(); i++)
-            ingredients.add(ingredientsJson.getString(i));
+            ingredients.add(ingredientsJson.optString(i));
         // Make a good sandwich
         Sandwich parsedSandwich = new Sandwich(mainName, alsoKnownAs, placeOfOrigin,
                 description, image, ingredients);
